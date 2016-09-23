@@ -9,6 +9,13 @@ public class Login {
 
 	}
 
+	public Login(String login_Id, String login_Pw) {
+
+		this.login_Id = login_Id;
+		this.login_Pw = login_Pw;
+
+	}
+
 	public String getLogin_Id() {
 		return login_Id;
 	}
