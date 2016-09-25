@@ -25,7 +25,7 @@ public class LoginDao {
 
 		try {
 
-			String sql = "select * from USERINFO where user_id = ? and user_pw = ?";
+			String sql = "select * from UserInfo where UserId = ? and UserPw = ?";
 			pstmt = Controllers.getProgramController().getConnection().prepareStatement(sql);
 			pstmt.setString(1, login.getLogin_Id());
 			pstmt.setString(2, login.getLogin_Pw());
