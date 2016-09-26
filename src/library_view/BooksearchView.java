@@ -26,7 +26,6 @@ public class BookSearchView {
 			
 			System.out.println("책이름검색 :");
 			String searchBook = keyboard.next();
-			
 			Controllers.getBookController().reqestSearchBook(searchBook);
 			
 		}else if(number == 2){

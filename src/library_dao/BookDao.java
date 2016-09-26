@@ -18,8 +18,8 @@ public class BookDao {
 		String sql = null;
 		
 		try{
-			
-			sql = "select BookName from Book where BookName like '% ? %'";
+			System.out.println(searchBook);
+			sql = "select BookName from Book where BookName like '%' || ? || '%'";
 			pstmt = Controllers.getProgramController().getConnection().prepareStatement(sql);
 			pstmt.setString(1, searchBook);
 			rs = pstmt.executeQuery();
