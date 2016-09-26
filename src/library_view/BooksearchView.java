@@ -5,11 +5,11 @@ import java.util.Scanner;
 import library_controller.Controllers;
 import library_domain.Book;
 
-public class BookSearchView {
+public class BooksearchView {
 	
 	private Scanner keyboard;
 	
-	public BookSearchView(){
+	public BooksearchView(){
 		
 		keyboard = new Scanner(System.in);
 		
