@@ -3,8 +3,7 @@ package library_view;
 import java.util.Scanner;
 
 import library_controller.Controllers;
-
-
+import library_domain.Book;
 
 public class BookSearchView {
 	
@@ -13,6 +12,16 @@ public class BookSearchView {
 	public BookSearchView(){
 		
 		keyboard = new Scanner(System.in);
+		
+	}
+	
+	public void searchedBookList(Book searchedBookName){
+		
+		System.out.println("바코드 번호 : " + searchedBookName.getBookBarcode());
+		System.out.println("책 이름 : " + searchedBookName.getBookName());
+		System.out.println("저자 : " + searchedBookName.getBookAuthor());
+		System.out.println("책회사 : " + searchedBookName.getBookPublisher());
+		System.out.println("성별 : " + searchedBookName.getGenreCode());
 		
 	}
 
@@ -24,13 +33,14 @@ public class BookSearchView {
 		
 		if(number == 1){
 			
-			System.out.println("책이름검색 :");
+			System.out.println("책이름검색 : ");
 			String searchBook = keyboard.next();
-			Controllers.getBookController().reqestSearchBook(searchBook);
+			
+			Controllers.getBookController().reqestSearchBookName(searchBook);
 			
 		}else if(number == 2){
 			
-			System.out.println("저자 검색:");
+			System.out.println("저자 검색: ");
 			Controllers.getBookController().requestSearchWriter();
 			
 		}else if(number == 3){

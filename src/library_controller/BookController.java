@@ -1,6 +1,7 @@
 package library_controller;
 
 import library_dao.BookDao;
+import library_domain.Book;
 import library_view.BookSearchView;
 
 public class BookController {
@@ -13,6 +14,7 @@ public class BookController {
 
 	}
 
+	//책 검색 페이지 뷰
 	public void requesrSearchBook() {
 		
 		BookSearchView booksearchView = new BookSearchView();
@@ -20,15 +22,14 @@ public class BookController {
 
 	}
 
-	public void reqestSearchBook(String searchBook) {
+	//책이름으로 검색하는 뷰
+	public void reqestSearchBookName(String searchBookName) {
 		
-		boolean success = bookDao.searchBook(searchBook);
+		Book searchedBookName = bookDao.searchBook(searchBookName);
 		
-		if(success){
-			System.out.println("책이름 찾기 성공");
-		} else{
-			System.out.println("책이름 찾기 실패");
-		}
+		//책이름으로 찾은 책 정보들을 뷰로 보여준다.
+		BookSearchView bookSearchView = new BookSearchView();
+		bookSearchView.searchedBookList(searchedBookName);
 		
 		//도서 검색 리스트 보여주기
 		requesrSearchBook();
