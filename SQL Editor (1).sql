@@ -4,6 +4,8 @@ create table Genre
    GenreName varchar2(50)
 );
 
+select * from Genre;
+
 CREATE TABLE UserInfo
 (
    UserBarcode int primary key,
@@ -16,6 +18,8 @@ CREATE TABLE UserInfo
    UserRegDate Date default sysdate
 );
 
+select * from UserInfo;
+
 create table admin
 (
    AdminId varchar2(50) primary key,
@@ -24,6 +28,7 @@ create table admin
    AdminName varchar2(50) not null
 );
 
+select * from admin;
 
 CREATE TABLE Book
 (
@@ -34,7 +39,11 @@ CREATE TABLE Book
    GenreCode varchar2(50) references Genre(GenreCode)
 );
 
-insert into book values(1,'kosta',1,1,1)
+select * from Book;
+
+insert into Book values(2,'kosta',1,1,null);
+insert into Book values(1,'코스타', '코스타', '코스타', null);
+
 
 CREATE TABLE BookLoan
 (
@@ -47,7 +56,7 @@ CREATE TABLE BookLoan
 
 );
 
-
+select * from BookLoan;
 
 create table bookmgm
 (
@@ -58,6 +67,8 @@ create table bookmgm
    
 );
 
+select * from bookmgm;
+
 create table LibCard
 (
    LibCardBarcode int primary key,
@@ -67,6 +78,8 @@ create table LibCard
    UserBarcode int references UserInfo(UserBarcode)
 );
 
+select * from LibCard;
+
 create table GenreMgm
 (
    GenreMgmNumber int,
@@ -74,6 +87,7 @@ create table GenreMgm
    AdminId varchar2(50) references Admin(AdminId)
 );
 
+select * from GenreMgm;
 
 drop table GenreMgm;
 drop table LibCard;
