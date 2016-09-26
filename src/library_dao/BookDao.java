@@ -21,6 +21,8 @@ public class BookDao {
 		String sql = null;
 		
 		try{
+			sql = "select BookName from Book where BookName like '%' || ? || '%'";
+
 			
 			sql = "select * from Book where BookName like '= %?%'";
 			pstmt = Controllers.getProgramController().getConnection().prepareStatement(sql);
