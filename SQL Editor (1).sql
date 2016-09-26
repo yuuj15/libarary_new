@@ -41,6 +41,7 @@ CREATE TABLE Book
 
 select * from Book;
 
+insert into Book values(3, '스타코' , '스타코', '스타코', null);
 insert into Book values(2,'kosta',1,1,null);
 insert into Book values(1,'코스타', '코스타', '코스타', null);
 
