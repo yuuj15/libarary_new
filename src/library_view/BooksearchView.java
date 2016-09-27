@@ -18,13 +18,6 @@ public class BooksearchView {
 
 	public void searchedBookList(ArrayList<Book> bookList){
 
-		//		System.out.println("바코드 번호 : " + searchedBookName.getBookBarcode());
-		//		System.out.println("책 이름 : " + searchedBookName.getBookName());
-		//		System.out.println("저자 : " + searchedBookName.getBookAuthor());
-		//		System.out.println("책회사 : " + searchedBookName.getBookPublisher());
-		//		System.out.println("성별 : " + searchedBookName.getGenreCode());
-
-
 		if(bookList.size() == 0){
 
 			System.out.println("찾으시는 제품이 없습니다.");
@@ -62,7 +55,9 @@ public class BooksearchView {
 		}else if(number == 2){
 
 			System.out.println("저자 검색: ");
-			Controllers.getBookController().requestSearchWriter();
+			String searchAuthor = keyboard.next();
+			
+			Controllers.getBookController().requestSearchAuthor(searchAuthor);
 
 		}else if(number == 3){
 
@@ -74,3 +69,4 @@ public class BooksearchView {
 	}
 
 }
+
