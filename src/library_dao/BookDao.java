@@ -11,11 +11,20 @@ import library_domain.User;
 
 public class BookDao {
 
+<<<<<<< HEAD
 	public Book searchBook(String searchBookName) {
 
 		// boolean success = false;
 		Book searchedBookName = null;
 
+=======
+	public ArrayList<Book> searchBook(String searchBookName) {
+		
+//		boolean success = false;
+		Book searchedBookName = null;
+		ArrayList<Book> bookList = new ArrayList<Book>();
+		
+>>>>>>> refs/remotes/pcj9027/master
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = null;
@@ -25,21 +34,41 @@ public class BookDao {
 			pstmt = Controllers.getProgramController().getConnection().prepareStatement(sql);
 			pstmt.setString(1, searchBookName);
 			rs = pstmt.executeQuery();
+<<<<<<< HEAD
 
 			if (rs.next()) {
+=======
+			
+//			if(rs.next()){
+//				searchedBookName = new Book();
+//				searchedBookName.setBookBarcode(rs.getInt("bookBarcode"));
+//				searchedBookName.setBookName(rs.getString("bookName"));
+//				searchedBookName.setBookAuthor(rs.getString("bookAuthor"));
+//				searchedBookName.setBookPublisher(rs.getString("bookPublisher"));
+//				searchedBookName.setGenreCode(rs.getString("genreCode"));
+//			}
+			
+			while(rs.next()){
+>>>>>>> refs/remotes/pcj9027/master
 				searchedBookName = new Book();
 				searchedBookName.setBookBarcode(rs.getInt("bookBarcode"));
 				searchedBookName.setBookName(rs.getString("bookName"));
 				searchedBookName.setBookAuthor(rs.getString("bookAuthor"));
 				searchedBookName.setBookPublisher(rs.getString("bookPublisher"));
 				searchedBookName.setGenreCode(rs.getString("genreCode"));
+				bookList.add(searchedBookName);
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+<<<<<<< HEAD
 
 		return searchedBookName;
+=======
+		
+		return bookList;
+>>>>>>> refs/remotes/pcj9027/master
 	}
 
 	public ArrayList<Book> searchAuthor(String searchAuthor) {

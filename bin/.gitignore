@@ -1,4 +1,12 @@
 /library_controller/
+<<<<<<< HEAD
 /library_view/
 /library_dao/
 /library_domain/
+=======
+/library_dao/
+/library_domain/
+/library_main/
+/library_repository/
+/library_view/
+>>>>>>> refs/remotes/pcj9027/master

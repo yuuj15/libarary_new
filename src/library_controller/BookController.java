@@ -26,6 +26,7 @@ public class BookController {
 
 	// 책이름으로 검색하는 뷰
 	public void reqestSearchBookName(String searchBookName) {
+<<<<<<< HEAD
 
 		Book searchedBookName = bookDao.searchBook(searchBookName);
 
@@ -34,6 +35,16 @@ public class BookController {
 		// bookSearchView.searchedBookList(searchedBookName);
 
 		// 도서 검색 리스트 보여주기
+=======
+		
+		ArrayList<Book> bookList = bookDao.searchBook(searchBookName);
+		
+		//책이름으로 찾은 책 정보들을 뷰로 보여준다.
+		BooksearchView bookSearchView = new BooksearchView();
+		bookSearchView.searchedBookList(bookList);
+		
+		//도서 검색 리스트 보여주기
+>>>>>>> refs/remotes/pcj9027/master
 		requesrSearchBook();
 
 	}
