@@ -31,13 +31,15 @@ public class BooksearchView {
 
 		} else{
 
+			System.out.println("[ 바코드 번호    |  책이름    |  저자    |  책회사    |  성별 ]");
+			
 			for(int i = 0; i < bookList.size(); i++){
-
-				System.out.println("바코드 번호: " + bookList.get(i).getBookBarcode());
-				System.out.println("책 이름: " + bookList.get(i).getBookName());
-				System.out.println("저자: " + bookList.get(i).getBookAuthor());
-				System.out.println("책회사: " + bookList.get(i).getBookPublisher());
-				System.out.println("성별: " + bookList.get(i).getGenreCode());
+				
+				System.out.print(" " + " " + bookList.get(i).getBookBarcode() + "\t");
+				System.out.print(" " + bookList.get(i).getBookName() + "\t");
+				System.out.print(" " + bookList.get(i).getBookAuthor() + "\t");
+				System.out.print(" " + bookList.get(i).getBookPublisher() + "\t");
+				System.out.println(" " + bookList.get(i).getGenreCode() + "\t");
 
 			}
 		}
