@@ -14,7 +14,7 @@ public class UserController {
 
 	}
 
-	//
+	//회원가입
 	public void requestRegisterUser() {
 		// 뷰를 보여줘서 회원가입을 받아온다.
 		UserRegisterView userRegisterView = new UserRegisterView();
