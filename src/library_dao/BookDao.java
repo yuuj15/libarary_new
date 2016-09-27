@@ -28,11 +28,12 @@ public class BookDao {
 			
 			if(rs.next()){
 				searchedBookName = new Book();
-				searchedBookName.setBookBarcode(rs.getInt("bookBarcode"));
+				searchedBookName.setBookBarcode(rs.getInt("bookBarcode"));				
 				searchedBookName.setBookName(rs.getString("bookName"));
 				searchedBookName.setBookAuthor(rs.getString("bookAuthor"));
 				searchedBookName.setBookPublisher(rs.getString("bookPublisher"));
 				searchedBookName.setGenreCode(rs.getString("genreCode"));
+				
 			}
 			
 		}catch(SQLException e){

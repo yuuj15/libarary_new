@@ -16,7 +16,6 @@ public class BooksearchView {
 	}
 	
 	public void searchedBookList(Book searchedBookName){
-		
 		System.out.println("바코드 번호 : " + searchedBookName.getBookBarcode());
 		System.out.println("책 이름 : " + searchedBookName.getBookName());
 		System.out.println("저자 : " + searchedBookName.getBookAuthor());
