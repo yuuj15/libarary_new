@@ -3,7 +3,6 @@ package library_dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import library_controller.Controllers;
@@ -31,19 +30,14 @@ public class BookDao {
 
 			while(rs.next()){
 
-
 				searchedBookName = new Book();
 				searchedBookName.setBookBarcode(rs.getInt("bookBarcode"));				
 				searchedBookName.setBookName(rs.getString("bookName"));
 				searchedBookName.setBookAuthor(rs.getString("bookAuthor"));
 				searchedBookName.setBookPublisher(rs.getString("bookPublisher"));
 				searchedBookName.setGenreCode(rs.getString("genreCode"));
-<<<<<<< HEAD
-				bookList.add(searchedBookName);
-
-=======
 				bookList.add(searchedBookName); 
->>>>>>> origin/master
+
 			}
 
 		} catch (SQLException e) {
