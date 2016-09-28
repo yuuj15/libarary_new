@@ -52,7 +52,7 @@ public class BookController {
 		requesrSearchBook();
 
 	}
-
+//론
 	public void requesutLoanList() {
 
 		ArrayList<Book> bookList = bookDao.searchLoanBook();
