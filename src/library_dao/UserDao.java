@@ -16,26 +16,50 @@ public class UserDao {
 
 		// 쿼리
 		PreparedStatement pstmt = null;
+		Statement stmt = null;
 		ResultSet rs = null;
+		ArrayList<User> users = new ArrayList<User>();
 		boolean success = false;
+		boolean duplicate = false;
 		int barcodNumber = 0;
 
 		try {
 
-			String sql = "insert into userinfo(userbarcode, userid, userpw, username, useraddr, usertel, usergender) values(?,?,?,?,?,?,?) ";
-			pstmt = Controllers.getProgramController().getConnection().prepareStatement(sql);
-			pstmt.setInt(1, user.getUserBarcode());
-			pstmt.setString(2, user.getUserId());
-			pstmt.setString(3, user.getUserPw());
-			pstmt.setString(4, user.getUserName());
-			pstmt.setString(5, user.getUserAddr());
-			pstmt.setString(6, user.getUserTel());
-			pstmt.setString(7, user.getUserGender());
+			String sql = "select userid from userinfo ";
+			stmt = Controllers.getProgramController().getConnection().createStatement();
 
-			int result = pstmt.executeUpdate();
+			rs = stmt.executeQuery(sql);
+			while (rs.next()) {
 
-			if (result != 0) {
-				success = true;
+				User tempUserId = new User();// 1-1 객체생성을 해서 barcodeNumber를 리스트에
+												// 저장한거.
+				tempUserId.setUserId(rs.getString("userid"));
+				users.add(tempUserId);// 1-3
+			}
+			for (int i = 0; i < users.size(); i++) {
+				if (users.get(i).getUserId().equals(user.getUserId())) {
+
+					duplicate = true;
+				}
+
+			}
+			if (duplicate == false) {
+
+				sql = "insert into userinfo(userbarcode, userid, userpw, username, useraddr, usertel, usergender) values(?,?,?,?,?,?,?) ";
+				pstmt = Controllers.getProgramController().getConnection().prepareStatement(sql);
+				pstmt.setInt(1, user.getUserBarcode());
+				pstmt.setString(2, user.getUserId());
+				pstmt.setString(3, user.getUserPw());
+				pstmt.setString(4, user.getUserName());
+				pstmt.setString(5, user.getUserAddr());
+				pstmt.setString(6, user.getUserTel());
+				pstmt.setString(7, user.getUserGender());
+
+				int result = pstmt.executeUpdate();
+
+				if (result != 0) {
+					success = true;
+				}
 			}
 
 		} catch (
@@ -77,8 +101,7 @@ public class UserDao {
 
 		try {
 			String sql = "select userbarcode from userinfo ";
-			stmt = Controllers
-					.getProgramController().getConnection().createStatement();
+			stmt = Controllers.getProgramController().getConnection().createStatement();
 
 			rs = stmt.executeQuery(sql);
 			while (rs.next()) {

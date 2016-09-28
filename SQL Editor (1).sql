@@ -33,8 +33,20 @@ CREATE TABLE Book
    GenreCode varchar2(50) references Genre(GenreCode)
 );
 
+<<<<<<< HEAD
+=======
+select * from Book;
+
+insert into Book values(3, '스타코' , '스타코', '스타코', null);
+insert into Book values(2,'kosta',1,1,null);
+insert into Book values(1,'코스타', '코스타', '코스타', null);
+commit;
+
+
+>>>>>>> origin/master
 CREATE TABLE BookLoan
 (
+
    LoanNumber int primary key,
    BookLoanTF varchar2(10) default 'f',
    BookLoanDate Date default sysdate,
@@ -44,6 +56,22 @@ CREATE TABLE BookLoan
 
 );
 
+<<<<<<< HEAD
+=======
+select * from BookLoan;
+
+--TOP5 대출 순위 리스트 sql문
+select rownum, book.BOOKNAME
+from (
+select count(bookbarcode) tt ,bookbarcode 
+from bookloan
+where bookbarcode is not null
+group by bookbarcode
+order by tt desc ) tmp, book
+where book.bookbarcode = tmp.bookbarcode
+and rownum <=5;
+
+>>>>>>> origin/master
 create table bookmgm
 (
    BookMgmNumber int primary key,
@@ -78,5 +106,9 @@ drop table admin;
 drop table UserInfo;
 drop table Genre;
 
+<<<<<<< HEAD
 
 
+=======
+select * from GenreMgm;
+>>>>>>> origin/master
