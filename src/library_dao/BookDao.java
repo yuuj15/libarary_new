@@ -8,19 +8,13 @@ import java.util.ArrayList;
 
 import library_controller.Controllers;
 import library_domain.Book;
-<<<<<<< HEAD
-=======
 import library_domain.BookLoanTop5;
->>>>>>> refs/remotes/pcj9027/master
+
 
 public class BookDao {
 
 	public ArrayList<Book> searchBook(String searchBookName) {
 
-<<<<<<< HEAD
-		// boolean success = false;
-=======
->>>>>>> refs/remotes/pcj9027/master
 		Book searchedBookName = null;
 		ArrayList<Book> bookList = new ArrayList<Book>();
 
@@ -34,11 +28,9 @@ public class BookDao {
 			pstmt.setString(1, searchBookName);
 			rs = pstmt.executeQuery();
 
-<<<<<<< HEAD
-			while (rs.next()) {
-=======
+
 			while(rs.next()){
->>>>>>> refs/remotes/pcj9027/master
+
 
 				searchedBookName = new Book();
 				searchedBookName.setBookBarcode(rs.getInt("bookBarcode"));
@@ -100,11 +92,10 @@ public class BookDao {
 
 		return bookinfo;
 	}
-<<<<<<< HEAD
+
 
 	public ArrayList<Book> searchLoanBook() {
 
-		boolean success = false;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<Book> booklist =new ArrayList<Book>();
@@ -115,7 +106,7 @@ public class BookDao {
 			pstmt = Controllers.getProgramController().getConnection().prepareStatement(sql);
 			pstmt.setString(1, bookLoantf);
 			rs = pstmt.executeQuery();
-			
+
 			while(rs.next()){
 				Book searchLoanBook = new Book();
 				searchLoanBook.setBookName(rs.getString("bookname"));
@@ -132,9 +123,6 @@ public class BookDao {
 		return booklist;
 	}
 
-
-}
-=======
 	//TOP5 대출 리스트 출력
 	public ArrayList<BookLoanTop5> bookLoanList() {
 
@@ -179,4 +167,3 @@ public class BookDao {
 		return bookLoans;
 	}
 }
->>>>>>> refs/remotes/pcj9027/master
