@@ -34,11 +34,8 @@ public class BookDao {
 				searchedBookName.setBookAuthor(rs.getString("bookAuthor"));
 				searchedBookName.setBookPublisher(rs.getString("bookPublisher"));
 				searchedBookName.setGenreCode(rs.getString("genreCode"));
-<<<<<<< HEAD
-				
-=======
 				bookList.add(searchedBookName);
->>>>>>> origin/master
+
 			}
 
 		} catch (SQLException e) {

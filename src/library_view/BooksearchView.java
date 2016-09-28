@@ -15,16 +15,6 @@ public class BooksearchView {
 		keyboard = new Scanner(System.in);
 
 	}
-<<<<<<< HEAD
-	
-	public void searchedBookList(Book searchedBookName){
-		System.out.println("바코드 번호 : " + searchedBookName.getBookBarcode());
-		System.out.println("책 이름 : " + searchedBookName.getBookName());
-		System.out.println("저자 : " + searchedBookName.getBookAuthor());
-		System.out.println("책회사 : " + searchedBookName.getBookPublisher());
-		System.out.println("성별 : " + searchedBookName.getGenreCode());
-		
-=======
 
 	public void searchedBookList(ArrayList<Book> bookList){
 
@@ -46,7 +36,6 @@ public class BooksearchView {
 
 			}
 		}
->>>>>>> origin/master
 	}
 
 
