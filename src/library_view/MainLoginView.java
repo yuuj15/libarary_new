@@ -17,6 +17,9 @@ public class MainLoginView {
 	public void showMainPage() {
 
 		while (true) {
+			
+			//TOP5 대출 내역 	
+			Controllers.getBookController().requestTop5List();
 
 			boolean success = Controllers.getLoginControlles().requestLoginCheck();
 

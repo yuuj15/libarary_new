@@ -49,6 +49,7 @@ commit;
 
 CREATE TABLE BookLoan
 (
+
    LoanNumber int primary key,
    BookLoanTF varchar2(10) default 'f',
    BookLoanDate Date default sysdate,
@@ -59,6 +60,17 @@ CREATE TABLE BookLoan
 );
 
 select * from BookLoan;
+
+--TOP5 대출 순위 리스트 sql문
+select rownum, book.BOOKNAME
+from (
+select count(bookbarcode) tt ,bookbarcode 
+from bookloan
+where bookbarcode is not null
+group by bookbarcode
+order by tt desc ) tmp, book
+where book.bookbarcode = tmp.bookbarcode
+and rownum <=5;
 
 create table bookmgm
 (
@@ -101,6 +113,3 @@ drop table UserInfo;
 drop table Genre;
 
 select * from GenreMgm;
-
-
-
