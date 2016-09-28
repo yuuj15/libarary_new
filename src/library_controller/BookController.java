@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import library_dao.BookDao;
 import library_domain.Book;
+import library_view.BookLoanListView;
 import library_view.BooksearchView;
 
 public class BookController {
@@ -29,12 +30,12 @@ public class BookController {
 
 		// 도서 검색 리스트 보여주기
 		ArrayList<Book> bookList = bookDao.searchBook(searchBookName);
-		
-		//책이름으로 찾은 책 정보들을 뷰로 보여준다.
+
+		// 책이름으로 찾은 책 정보들을 뷰로 보여준다.
 		BooksearchView bookSearchView = new BooksearchView();
 		bookSearchView.searchedBookList(bookList);
-		
-		//도서 검색 리스트 보여주기
+
+		// 도서 검색 리스트 보여주기
 
 		requesrSearchBook();
 
@@ -49,6 +50,17 @@ public class BookController {
 
 		// 도서 검색 리스트 보여주기
 		requesrSearchBook();
+
+	}
+
+	public void requesutLoanList() {
+
+		ArrayList<Book> bookList = bookDao.searchLoanBook();
+
+		BookLoanListView bookLoanListView = new BookLoanListView();
+		bookLoanListView.searchedLoanList(bookList);
+		
+		Controllers.getLoginControlles().requestMainLogin();
 
 	}
 

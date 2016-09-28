@@ -3,20 +3,19 @@ package library_dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import library_controller.Controllers;
 import library_domain.Book;
-import library_domain.User;
 
 public class BookDao {
 
 	public ArrayList<Book> searchBook(String searchBookName) {
-		
-//		boolean success = false;
+
+		// boolean success = false;
 		Book searchedBookName = null;
 		ArrayList<Book> bookList = new ArrayList<Book>();
-		
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -27,8 +26,8 @@ public class BookDao {
 			pstmt = Controllers.getProgramController().getConnection().prepareStatement(sql);
 			pstmt.setString(1, searchBookName);
 			rs = pstmt.executeQuery();
-			
-			while(rs.next()){
+
+			while (rs.next()) {
 
 				searchedBookName = new Book();
 				searchedBookName.setBookBarcode(rs.getInt("bookBarcode"));
@@ -36,13 +35,13 @@ public class BookDao {
 				searchedBookName.setBookAuthor(rs.getString("bookAuthor"));
 				searchedBookName.setBookPublisher(rs.getString("bookPublisher"));
 				searchedBookName.setGenreCode(rs.getString("genreCode"));
-				bookList.add(searchedBookName);
+				bookList.add(searchedBookName); 
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return bookList;
 
 	}
@@ -76,4 +75,36 @@ public class BookDao {
 
 		return bookinfo;
 	}
+
+	public ArrayList<Book> searchLoanBook() {
+
+		boolean success = false;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<Book> booklist =new ArrayList<Book>();
+		String bookLoantf = "f";
+
+		try {
+			String sql = "select * from book,bookloan where book.bookbarcode = bookloan.bookbarcode and bookloanTF = ? ";
+			pstmt = Controllers.getProgramController().getConnection().prepareStatement(sql);
+			pstmt.setString(1, bookLoantf);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				Book searchLoanBook = new Book();
+				searchLoanBook.setBookName(rs.getString("bookname"));
+				searchLoanBook.setBookAuthor(rs.getString("bookAuthor"));
+				searchLoanBook.setBookPublisher(rs.getString("bookPublisher"));
+				searchLoanBook.setGenreCode(rs.getString("genrecode"));
+				booklist.add(searchLoanBook);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return booklist;
+	}
+
+
 }
