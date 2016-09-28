@@ -10,14 +10,14 @@ import library_repository.LoginRepository;
 
 public class LoginDao {
 
-	public LoginDao(){
+	public LoginDao() {
 
 		new LoginRepository();
 
 	}
 
-	//로그인 등록
-	public boolean login(Login login){
+	// 로그인 등록
+	public boolean login(Login login) {
 
 		boolean success = false;
 		PreparedStatement pstmt = null;
@@ -31,23 +31,24 @@ public class LoginDao {
 			pstmt.setString(2, login.getLogin_Pw());
 			rs = pstmt.executeQuery();
 
-			if (rs.next()) { 
+			if (rs.next()) {
 				LoginRepository.setLogin(login);
 				success = true;
 			}
 
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
-			
-		} finally{
-			if(rs != null){
+
+		} finally {
+			if (rs != null) {
 				try {
 					rs.close();
-				} catch(SQLException e){
+				} catch (SQLException e) {
 					e.printStackTrace();
 				}
-			} if (pstmt != null) {
+			}
+			if (pstmt != null) {
 				try {
 					pstmt.close();
 				} catch (SQLException e) {
@@ -60,8 +61,8 @@ public class LoginDao {
 		return success;
 	}
 
-	//로그인 체크
-	public boolean loginCheck(){
+	// 로그인 체크
+	public boolean loginCheck() {
 
 		boolean success = false;
 
@@ -73,11 +74,21 @@ public class LoginDao {
 
 	}
 
-	//로그아웃
-	public void logOut(){
+	// 로그아웃
+	public void logOut() {
 
 		LoginRepository.setLogin(null);
 
+	}
+	//패스워드 체크
+	public boolean password(String pwInfo) { 
+
+		boolean success = false;
+		if (LoginRepository.getLogin().getLogin_Pw().equals(pwInfo)) {
+
+			success = true;
+		}
+		return success;
 	}
 
 }
