@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import library_controller.Controllers;
 
-
 public class MainLoginView {
 
 	private Scanner keyboard;
@@ -24,12 +23,13 @@ public class MainLoginView {
 
 			boolean success = Controllers.getLoginControlles().requestLoginCheck();
 
-			if(!success){
+			if (!success) {
+				System.out.println("\n");
 				System.out.print("[1. 회원가입, 2. 도서검색, 3. 로그인, 0. 프로그램 종료] : ");
-			}else{
-				System.out.print("[1. 회원가입, 2. 도서검색, 3. 로그아웃 , 0. 프로그램 종료] : ");
+			} else {
+				System.out.println("----------------------------------------------------------------");
+				System.out.print("[1. 회원가입, 2. 도서검색, 3. 로그아웃 , 4. 마이페이지, 0. 프로그램 종료] : ");
 			}
-
 
 			int selectedMenu = keyboard.nextInt();
 
@@ -48,6 +48,11 @@ public class MainLoginView {
 				} else {
 					Controllers.getLoginControlles().requestLogOut();
 				}
+				break;
+			case 4:
+			
+				Controllers.getUserpageController().requestUserPage();
+				
 				break;
 			case 0:
 				System.out.println("프로그램 종료");

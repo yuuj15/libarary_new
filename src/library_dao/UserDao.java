@@ -1,4 +1,4 @@
-package library_dao;
+  package library_dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,6 +9,7 @@ import java.util.Random;
 
 import library_controller.Controllers;
 import library_domain.User;
+import library_repository.LoginRepository;
 
 public class UserDao {
 
@@ -134,5 +135,53 @@ public class UserDao {
 		}
 		return user;
 
+	}
+
+	public ArrayList<User> userList() {
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<User> userList = new ArrayList<User>();
+		String userId = LoginRepository.getLogin().getLogin_Id();
+
+		try {
+
+			String sql = "select * from userinfo where userId = ? ";
+			pstmt = Controllers.getProgramController().getConnection().prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				User user = new User();
+				user.setUserBarcode(rs.getInt("userBarcode"));
+				user.setUserId(rs.getString("userId"));
+				user.setUserName(rs.getString("userName"));
+				user.setUserAddr(rs.getString("userAddr"));
+				user.setUserTel(rs.getString("userTel"));
+				user.setUserGender(rs.getString("userGender"));
+				userList.add(user);
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return userList;
 	}
 }

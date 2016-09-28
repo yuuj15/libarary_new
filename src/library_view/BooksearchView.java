@@ -24,7 +24,7 @@ public class BooksearchView {
 
 		} else{
 
-			System.out.println("[ 바코드 번호    |  책이름    |  저자    |  책회사    |  성별 ]");
+			System.out.println("[ 바코드 번호    |  책이름    |  저자    |  출판사    |  장르 ]");
 			
 			for(int i = 0; i < bookList.size(); i++){
 				
