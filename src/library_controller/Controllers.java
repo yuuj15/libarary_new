@@ -7,6 +7,7 @@ public class Controllers {
 	private static BookController bookController;
 	private static ProgramController programController;
 	private static UserPageController userpageController;
+	private static SearchHopeBookController searchHopeBookController;
 	
 	public Controllers() {
 
@@ -15,6 +16,7 @@ public class Controllers {
 		bookController = new BookController();
 		programController = new ProgramController();
 		userpageController = new UserPageController();
+		searchHopeBookController = new SearchHopeBookController();
 		
 	}
 
@@ -45,5 +47,8 @@ public class Controllers {
 
 	}
 
+	public static SearchHopeBookController getSearchHopeBookController() {
+		return searchHopeBookController;
+	}
 	
 }
