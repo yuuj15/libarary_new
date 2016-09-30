@@ -28,6 +28,9 @@ create table admin
    AdminName varchar2(50) not null
 );
 
+insert into admin values(1, 1, 1, 1);
+commit;
+
 select * from admin;
 
 CREATE TABLE Book
@@ -122,6 +125,18 @@ CREATE TABLE REQUESTBOOK(
   REQUESTBOOKCOUNTNUMBER INT NOT NULL,
   REQUESTBOOKPRICE INT NOT NULL
   );
+  
+ CREATE TABLE CARTBOOK(
+  
+  BOOKNUMBER INT PRIMARY KEY,
+  BOOKNAME VARCHAR2(50) NOT NULL,
+  BOOKAUTHOR VARCHAR2(50) NOT NULL,
+  BOOKPUBLISHER VARCHAR2(50) NOT NULL,
+  BOOKCOUNTNUMBER VARCHAR2(50) NOT NULL,
+  BOOKPRICE INT NOT NULL,
+  BOOKBUYDATE DATE DEFAULT SYSDATE
+  
+);
 
 drop table GenreMgm;
 drop table LibCard;
@@ -131,3 +146,6 @@ drop table Book;
 drop table admin;
 drop table UserInfo;
 drop table Genre;
+drop table SEARCHBOOK;
+drop table REQUESTBOOK;
+drop table CARTBOOK;

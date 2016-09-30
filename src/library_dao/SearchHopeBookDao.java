@@ -146,12 +146,18 @@ public class SearchHopeBookDao {
 			pstmt = Controllers.getProgramController().getConnection().prepareStatement(sql);
 			pstmt.setInt(1, searchedBookNumber);
 			rs = pstmt.executeQuery();
+			
+			
+			sql = "select REQUESTBOOKCOUNTNUMBER from REQUESTBOOK";
+			pstmt = Controllers.getProgramController().getConnection().prepareStatement(sql);
+			rs = pstmt.executeQuery();
 
-			if(rs.next()){//중복이 있다.
-				countNumber = hopeCountNumber + rs.getInt("REQUESTBOOKCOUNTNUMBER");
-				sql = "update REQUESTBOOK set REQUESTBOOKCOUNTNUMBER = ? set where REQUESTBOOKNUMBER = ?";
+			if(rs.next()){ //중복이 있다.
+				countNumber = rs.getInt("REQUESTBOOKCOUNTNUMBER");
+				int countNumbers = countNumber + hopeCountNumber;
+				sql = "update REQUESTBOOK set REQUESTBOOKCOUNTNUMBER = ? where REQUESTBOOKNUMBER = ?";
 				pstmt = Controllers.getProgramController().getConnection().prepareStatement(sql);
-				pstmt.setInt(1, countNumber);
+				pstmt.setInt(1, countNumbers);
 				pstmt.setInt(2, searchedBookNumber);
 				int result = pstmt.executeUpdate();
 				
@@ -160,6 +166,7 @@ public class SearchHopeBookDao {
 					success = true;
 					
 				}
+				
 			}else{
 
 				sql = "insert into REQUESTBOOK values(?, ?, ?, ?, ?, ?)";
@@ -187,5 +194,5 @@ public class SearchHopeBookDao {
 	}
 
 	//신청한 자료가 admin으로 넘겨주기
-
+	
 }
