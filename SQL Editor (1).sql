@@ -1,9 +1,22 @@
+--테이블 삭제
+drop table Genre;
+drop table  userinfo;
+drop table admin;
+drop table book;
+drop table bookloan;
+drop table bookmgm;
+drop table libcard;
+drop table genremgm;
+
+--테이블생성
+--장르테이블 생성
 create table Genre
 (
    GenreCode varchar2(50) primary key,
    GenreName varchar2(50)
 );
 
+--유저테이블 생성
 CREATE TABLE UserInfo
 (
    UserBarcode int primary key,
@@ -16,6 +29,7 @@ CREATE TABLE UserInfo
    UserRegDate Date default sysdate
 );
 
+--관리자테이블 생성
 create table admin
 (
    AdminId varchar2(50) primary key,
@@ -24,14 +38,7 @@ create table admin
    AdminName varchar2(50) not null
 );
 
-<<<<<<< HEAD
-=======
-insert into admin values(1, 1, 1, 1);
-commit;
-
-select * from admin;
-
->>>>>>> origin/master
+--도서테이블 생성
 CREATE TABLE Book
 (
    BookBarCode int primary key,
@@ -41,52 +48,16 @@ CREATE TABLE Book
    GenreCode varchar2(50) references Genre(GenreCode)
 );
 
-<<<<<<< HEAD
-=======
-select * from Book;
-
-insert into Book values(3, '스타코' , '스타코', '스타코', null);
-insert into Book values(2,'kosta',1,1,null);
-insert into Book values(1,'코스타', '코스타', '코스타', null);
-commit;
-
-
->>>>>>> origin/master
+--
 CREATE TABLE BookLoan
 (
-
    LoanNumber int primary key,
-   BookLoanTF varchar2(10) default 'f',
+   BookLoanTF varchar2(10) default 't',
    BookLoanDate Date default sysdate,
    AdminId varchar2(50) references Admin(adminId),
    UserBarCode int references UserInfo(UserBarcode),
    BookBarCode int references Book(BookBarCode)
 
-);
-
-<<<<<<< HEAD
-=======
-select * from BookLoan;
-
---TOP5 대출 순위 리스트 sql문
-select rownum, book.BOOKNAME
-from (
-select count(bookbarcode) tt ,bookbarcode 
-from bookloan
-where bookbarcode is not null
-group by bookbarcode
-order by tt desc ) tmp, book
-where book.bookbarcode = tmp.bookbarcode
-and rownum <=5;
-
->>>>>>> origin/master
-create table bookmgm
-(
-   BookMgmNumber int primary key,
-   BookMgmDate date default sysdate,
-   adminId varchar2(50) references Admin(adminId),
-   BookBarcode int references Book(BookBarcode)
-   
 );
 
 create table LibCard
@@ -104,10 +75,15 @@ create table GenreMgm
    GenreCode varchar2(50) references Genre(GenreCode),
    AdminId varchar2(50) references Admin(AdminId)
 );
+create table bookmgm
+(
+   BookMgmNumber int primary key,
+   BookMgmDate date default sysdate,
+   adminId varchar2(50) references Admin(adminId),
+   BookBarcode int references Book(BookBarcode)
+   
+);
 
-<<<<<<< HEAD
-=======
-select * from GenreMgm;
 
 --희망도서 신청
 CREATE TABLE SEARCHBOOK(
@@ -141,25 +117,39 @@ CREATE TABLE REQUESTBOOK(
   
 );
 
->>>>>>> origin/master
-drop table GenreMgm;
-drop table LibCard;
-drop table bookmgm;
-drop table BookLoan;
-drop table Book;
-drop table admin;
-drop table UserInfo;
-drop table Genre;
-<<<<<<< HEAD
 
-<<<<<<< HEAD
+insert into admin values('admin','admin','관장','김권식');
+insert into genre values('g1','철학');
+insert into genre values('g2 ','종교');
+insert into genre values('g3 ','사회과학');
+insert into genre values('g4 ','순수과학');
+insert into genre values('g5 ','기술과학');
+insert into genre values('g6 ','예술');
+insert into genre values('g7 ','언어');
+insert into genre values('g8 ','문학 ');
+insert into genre values('g9 ','역사 ');
+insert into genre values('g10 ','학문과 과학 ');
+insert into genre values('g11 ','언어와 문학 ');
+commit;
 
+insert into SEARCHBOOK values(1, '롤리폴리', '폴리', '롤리', '1000');
+insert into SEARCHBOOK values(2, '미네랄워터', '미네랄', '워터', '1000');
+insert into SEARCHBOOK values(3, '메모장', '메', '모장', '1000');
+insert into SEARCHBOOK values(4, '아로니아', '아로', '니아', '1000');
+insert into SEARCHBOOK values(5, '스프린트', '스', '프른트', '1000');
+insert into SEARCHBOOK values(6, '지프로', '지', '프로', '1000');
+insert into SEARCHBOOK values(7, '에이그레이트', '에이', '그레이트', '1000');
+insert into SEARCHBOOK values(8, '마웃', '마', '우스', '1000');
+insert into SEARCHBOOK values(9, '이슈리스크', '이슈', '리스크', '1000');
+insert into SEARCHBOOK values(10, '생쥐와거미', '생쥐', '거미', '1000');
+insert into SEARCHBOOK values(11, '롤미메', '폴미모', '니프', '1000');
+commit;
 
-=======
-select * from GenreMgm;
->>>>>>> origin/master
-=======
-drop table SEARCHBOOK;
-drop table REQUESTBOOK;
-drop table CARTBOOK;
->>>>>>> origin/master
+select * from genre;
+select * from userinfo;
+select * from admin;
+select * from book;
+select * from bookloan;
+select * from bookmgm;
+select * from libcard;
+select * from genremgm;
