@@ -28,7 +28,7 @@ public class MainLoginView {
 				System.out.print("[1. 회원가입, 2. 도서검색, 3. 로그인, 0. 프로그램 종료] : ");
 			} else {
 				System.out.println("----------------------------------------------------------------");
-				System.out.print("[1. 회원가입, 2. 도서검색, 3. 로그아웃 , 4. 마이페이지, 0. 프로그램 종료] : ");
+				System.out.print("[1. 회원가입, 2. 도서검색, 3. 로그아웃 , 4. 마이페이지, 5. 희망도서, 0. 프로그램 종료] : ");
 			}
 
 			int selectedMenu = keyboard.nextInt();
@@ -50,9 +50,11 @@ public class MainLoginView {
 				}
 				break;
 			case 4:
-			
 				Controllers.getUserpageController().requestUserPage();
-				
+				break;
+			case 5:
+				System.out.println("희망도서관리 페이지 입니다.");
+				Controllers.getSearchHopeBookController().requestHopeBookList();
 				break;
 			case 0:
 				System.out.println("프로그램 종료");
