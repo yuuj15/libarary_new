@@ -1,4 +1,4 @@
-  package library_dao;
+package library_dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import library_controller.Controllers;
+import library_domain.BookDetail;
 import library_domain.User;
 import library_repository.LoginRepository;
 
@@ -184,4 +185,206 @@ public class UserDao {
 
 		return userList;
 	}
+
+	public BookDetail searchDetailBook(int barcodeNumber) {
+
+		BookDetail bookInfo = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			String sql = "select bookname,bookauthor,bookpublisher,genrename,bookloantf, bookloandate from book,genre,bookloan where book.bookbarcode = bookloan.bookbarcode and book.genrecode = genre.genrecode and book.bookbarcode = ?";
+			pstmt = Controllers.getProgramController().getConnection().prepareStatement(sql);
+			pstmt.setInt(1, barcodeNumber);
+			rs = pstmt.executeQuery();
+			int lineCount = 0;
+			while (rs.next()) {
+
+				lineCount = lineCount + 1;
+
+			}
+
+			if (lineCount > 0) {
+				sql = "select bookname,bookauthor,bookpublisher,genrename,bookloantf, bookloandate from book,genre,bookloan where book.bookbarcode = bookloan.bookbarcode and book.genrecode = genre.genrecode and book.bookbarcode = ?";
+				pstmt = Controllers.getProgramController().getConnection().prepareStatement(sql);
+				pstmt.setInt(1, barcodeNumber);
+				rs = pstmt.executeQuery();
+				if (rs.next()) {
+					bookInfo = new BookDetail();
+					bookInfo.setBookName(rs.getString("bookname"));
+					bookInfo.setBookAuthor(rs.getString("bookauthor"));
+					bookInfo.setBookPublisher(rs.getString("bookpublisher"));
+					bookInfo.setGenreName(rs.getString("genrename"));
+					bookInfo.setBookLoanTF(rs.getString("bookloantf"));
+					bookInfo.setBookLoanDate(rs.getDate("bookloandate"));
+				}
+
+			} else {
+				// 쿼리 날린 결과가 없다.
+				sql = "select bookname,bookauthor,bookpublisher,genrename from book, genre where book.genrecode = genre.genrecode and book.bookbarcode = ? ";
+				pstmt = Controllers.getProgramController().getConnection().prepareStatement(sql);
+				pstmt.setInt(1, barcodeNumber);
+				rs = pstmt.executeQuery();
+				if (rs.next()) {
+					bookInfo = new BookDetail();
+					bookInfo.setBookName(rs.getString("bookname"));
+					bookInfo.setBookAuthor(rs.getString("bookauthor"));
+					bookInfo.setBookPublisher(rs.getString("bookpublisher"));
+					bookInfo.setGenreName(rs.getString("genrename"));
+					bookInfo.setBookLoanTF("t");
+				}
+
+			}
+
+		} catch (
+
+		SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return bookInfo;
+
+	}
+
+	public boolean userChangeName(String userNewName) {
+
+		boolean success = false;
+		PreparedStatement pstmt = null;
+		String userid = LoginRepository.getLogin().getLogin_Id();
+
+		try {
+			String sql = "update userinfo set username = ? where userid =?";
+			pstmt = Controllers.getProgramController().getConnection().prepareStatement(sql);
+			pstmt.setString(1, userNewName);
+			pstmt.setString(2, userid);
+			int result = pstmt.executeUpdate();// 수정이 안될경우 0으로 리턴 수정이 된 갯수만큼 n으로
+												// 리턴
+			if (result != 0) {
+				success = true;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return success;
+	}
+
+	public boolean userChangeAddr(String userNewAddr) {
+
+		boolean success = false;
+		PreparedStatement pstmt = null;
+		String userid = LoginRepository.getLogin().getLogin_Id();
+
+		try {
+			String sql = "update userinfo set useraddr = ? where userid =?";
+			pstmt = Controllers.getProgramController().getConnection().prepareStatement(sql);
+			pstmt.setString(1, userNewAddr);
+			pstmt.setString(2, userid);
+			int result = pstmt.executeUpdate();// 수정이 안될경우 0으로 리턴 수정이 된 갯수만큼 n으로
+												// 리턴
+			if (result != 0) {
+				success = true;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return success;
+	}
+
+	public boolean userChangeTel(String userNewTel) {
+
+		boolean success = false;
+		PreparedStatement pstmt = null;
+		String userid = LoginRepository.getLogin().getLogin_Id();
+
+		try {
+			String sql = "update userinfo set userTel = ? where userid =?";
+			pstmt = Controllers.getProgramController().getConnection().prepareStatement(sql);
+			pstmt.setString(1, userNewTel);
+			pstmt.setString(2, userid);
+			int result = pstmt.executeUpdate();// 수정이 안될경우 0으로 리턴 수정이 된 갯수만큼 n으로
+												// 리턴
+			if (result != 0) {
+				success = true;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return success;
+	}
+	public boolean userDelete() {
+
+		boolean success = false;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String userid = LoginRepository.getLogin().getLogin_Id();
+		int barcodeNumber = 0;
+
+		try {
+			String sql = "select userbarcode from userinfo where userid = ? ";
+			pstmt = Controllers.getProgramController().getConnection().prepareStatement(sql);
+			pstmt.setString(1, userid);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+
+				barcodeNumber = rs.getInt("userbarcode");
+			}
+
+			sql = "delete bookloan where userbarcode = ?";
+			pstmt = Controllers.getProgramController().getConnection().prepareStatement(sql);
+			pstmt.setInt(1, barcodeNumber);
+			int result = pstmt.executeUpdate();
+
+			sql = "delete libcard where userbarcode = ?";
+			pstmt = Controllers.getProgramController().getConnection().prepareStatement(sql);
+			pstmt.setInt(1, barcodeNumber);
+			result = pstmt.executeUpdate();
+
+			sql = "delete userinfo where userid = ?";
+			pstmt = Controllers.getProgramController().getConnection().prepareStatement(sql);
+			pstmt.setString(1, userid);
+			result = pstmt.executeUpdate();
+
+			if (result != 0) {
+				success = true;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return success;
+	}
+	public boolean password(String pwInfo) {
+
+		boolean success = false;
+		if (LoginRepository.getLogin().getLogin_Pw().equals(pwInfo)) {
+
+			success = true;
+		}
+		return success;
+	}
+
 }

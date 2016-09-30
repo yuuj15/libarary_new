@@ -4,10 +4,12 @@ import java.util.ArrayList;
 
 import library_dao.BookDao;
 import library_domain.Book;
-import library_view.BookLoanListView;
+import library_domain.BookDetail;
 import library_domain.BookLoanTop5;
+import library_view.BookDetailSearchView;
+import library_view.BookLoanListView;
+import library_view.BookSelectOneView;
 import library_view.BookTop5List;
-
 import library_view.BooksearchView;
 
 public class BookController {
@@ -76,5 +78,16 @@ public class BookController {
 		bookTop5List.top5List(bookLoans);
 
 	}
+	public void requestBookDetailSeacrch() {
+
+		BookDetailSearchView bookDetailSearchView = new BookDetailSearchView();
+		int barcodeNumber = bookDetailSearchView.bookDetailInfo();
+
+		BookDetail bookInfo = bookDao.searchDetailBook(barcodeNumber);
+
+		BookSelectOneView bookSelectOneView = new BookSelectOneView();
+		bookSelectOneView.outputOneBook(bookInfo);
+	}
+
 
 }

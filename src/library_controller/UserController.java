@@ -4,6 +4,11 @@ import java.util.ArrayList;
 
 import library_dao.UserDao;
 import library_domain.User;
+import library_repository.LoginRepository;
+import library_view.UserChangeAddrView;
+import library_view.UserChangeNameView;
+import library_view.UserChangeTelView;
+import library_view.UserCheckPwView;
 import library_view.UserListView;
 import library_view.UserRegisterView;
 
@@ -44,5 +49,49 @@ public class UserController {
 		
 		
 	}
+	public void requestChangeName() {
+
+		UserChangeNameView userChangeNameView = new UserChangeNameView();
+		String userNewName = userChangeNameView.UserNewName();
+
+		boolean success = userDao.userChangeName(userNewName);
+
+	}
+
+	public void requestChangeAddr() {
+
+		UserChangeAddrView userChangeAddrView = new UserChangeAddrView();
+		String userNewAddr = userChangeAddrView.UserNewAddr();
+
+		boolean success = userDao.userChangeAddr(userNewAddr);
+
+	}
+
+	public void requestChangeTel() {
+
+		UserChangeTelView userChangeTelView = new UserChangeTelView();
+		String userNewTel = userChangeTelView.UserNewTel();
+
+		boolean success = userDao.userChangeTel(userNewTel);
+
+	}
+
+	public void requsetUserDelete() {
+
+		UserCheckPwView checkPwView = new UserCheckPwView();
+		String pwInfo = checkPwView.getLoginInfo();
+		boolean success = userDao.password(pwInfo);
+		if (success == true) {
+
+			success = userDao.userDelete();
+			if (success == true) {
+				Controllers.getLoginControlles().requestLogOut();
+			}
+		}else{
+			System.out.println("비민번호가 틀립니다.");
+		}
+	}
+	
+
 
 }
