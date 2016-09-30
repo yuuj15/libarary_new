@@ -24,6 +24,14 @@ create table admin
    AdminName varchar2(50) not null
 );
 
+<<<<<<< HEAD
+=======
+insert into admin values(1, 1, 1, 1);
+commit;
+
+select * from admin;
+
+>>>>>>> origin/master
 CREATE TABLE Book
 (
    BookBarCode int primary key,
@@ -97,6 +105,43 @@ create table GenreMgm
    AdminId varchar2(50) references Admin(AdminId)
 );
 
+<<<<<<< HEAD
+=======
+select * from GenreMgm;
+
+--희망도서 신청
+CREATE TABLE SEARCHBOOK(
+
+  SEARCHBOOKNUMBER VARCHAR2(50) PRIMARY KEY,
+  SEARCHBOOKNAME VARCHAR2(50) NOT NULL,
+  SEARCHBOOKAUTHOR VARCHAR2(50) NOT NULL,
+  SEARCHBOOKPUBLISHER VARCHAR2(50) NOT NULL,
+  SEARCHBOOKPRICE INT NOT NULL
+  );
+  
+CREATE TABLE REQUESTBOOK(
+
+  REQUESTBOOKNUMBER INT PRIMARY KEY,
+  REQUESTBOOKNAME VARCHAR2(50) NOT NULL,
+  REQUESTBOOKAUTHOR VARCHAR2(50) NOT NULL,
+  REQUESTBOOKPUBLISHER VARCHAR2(50) NOT NULL,
+  REQUESTBOOKCOUNTNUMBER INT NOT NULL,
+  REQUESTBOOKPRICE INT NOT NULL
+  );
+  
+ CREATE TABLE CARTBOOK(
+  
+  BOOKNUMBER INT PRIMARY KEY,
+  BOOKNAME VARCHAR2(50) NOT NULL,
+  BOOKAUTHOR VARCHAR2(50) NOT NULL,
+  BOOKPUBLISHER VARCHAR2(50) NOT NULL,
+  BOOKCOUNTNUMBER VARCHAR2(50) NOT NULL,
+  BOOKPRICE INT NOT NULL,
+  BOOKBUYDATE DATE DEFAULT SYSDATE
+  
+);
+
+>>>>>>> origin/master
 drop table GenreMgm;
 drop table LibCard;
 drop table bookmgm;
@@ -105,10 +150,16 @@ drop table Book;
 drop table admin;
 drop table UserInfo;
 drop table Genre;
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 
 
 =======
 select * from GenreMgm;
+>>>>>>> origin/master
+=======
+drop table SEARCHBOOK;
+drop table REQUESTBOOK;
+drop table CARTBOOK;
 >>>>>>> origin/master

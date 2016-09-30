@@ -92,7 +92,7 @@ public class UserDao {
 
 	public User generateinsert(User user) {
 
-		Random r = new Random();// 랜덤함수 생성
+		Random r = new Random(); // 랜덤함수 생성
 		int barcodNumber = r.nextInt(899999) + 100000; // 10000~999999까지
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;
