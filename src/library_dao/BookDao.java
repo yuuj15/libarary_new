@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import library_controller.Controllers;
 import library_domain.Book;
+import library_domain.BookDetail;
 import library_domain.BookLoanTop5;
 
 
@@ -164,5 +165,83 @@ public class BookDao {
 
 		//리턴값으로 top5 대출 내역 보내기
 		return bookLoans;
+	}
+	public BookDetail searchDetailBook(int barcodeNumber) {
+
+		BookDetail bookInfo = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			String sql = "select bookname,bookauthor,bookpublisher,genrename,bookloantf, bookloandate from book,genre,bookloan where book.bookbarcode = bookloan.bookbarcode and book.genrecode = genre.genrecode and book.bookbarcode = ?";
+			pstmt = Controllers.getProgramController().getConnection().prepareStatement(sql);
+			pstmt.setInt(1, barcodeNumber);
+			rs = pstmt.executeQuery();
+			int lineCount = 0;
+			while (rs.next()) {
+
+				lineCount = lineCount + 1;
+
+			}
+
+			if (lineCount > 0) {
+				sql = "select bookname,bookauthor,bookpublisher,genrename,bookloantf, bookloandate from book,genre,bookloan where book.bookbarcode = bookloan.bookbarcode and book.genrecode = genre.genrecode and book.bookbarcode = ?";
+				pstmt = Controllers.getProgramController().getConnection().prepareStatement(sql);
+				pstmt.setInt(1, barcodeNumber);
+				rs = pstmt.executeQuery();
+				if(rs.next())
+				{
+					bookInfo = new BookDetail();
+					bookInfo.setBookName(rs.getString("bookname"));
+					bookInfo.setBookAuthor(rs.getString("bookauthor"));
+					bookInfo.setBookPublisher(rs.getString("bookpublisher"));
+					bookInfo.setGenreName(rs.getString("genrename"));
+					bookInfo.setBookLoanTF(rs.getString("bookloantf"));
+					bookInfo.setBookLoanDate(rs.getDate("bookloandate"));
+				}
+				
+
+			} else {
+				// 쿼리 날린 결과가 없다.
+				sql = "select bookname,bookauthor,bookpublisher,genrename from book, genre where book.genrecode = genre.genrecode and book.bookbarcode = ? ";
+				pstmt = Controllers.getProgramController().getConnection().prepareStatement(sql);
+				pstmt.setInt(1, barcodeNumber);
+				rs = pstmt.executeQuery();
+				if(rs.next())
+				{
+					bookInfo = new BookDetail();
+					bookInfo.setBookName(rs.getString("bookname"));
+					bookInfo.setBookAuthor(rs.getString("bookauthor"));
+					bookInfo.setBookPublisher(rs.getString("bookpublisher"));
+					bookInfo.setGenreName(rs.getString("genrename"));
+					bookInfo.setBookLoanTF("t");
+				}
+				
+			}
+
+		} catch (
+
+		SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return bookInfo;
+
 	}
 }

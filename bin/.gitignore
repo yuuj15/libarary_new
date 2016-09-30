@@ -1,4 +1,9 @@
 /library_controller/
 /library_dao/
+<<<<<<< HEAD
 /library_view/
 /library_domain/
+=======
+/library_domain/
+/library_view/
+>>>>>>> origin/master
