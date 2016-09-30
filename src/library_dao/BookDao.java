@@ -31,7 +31,6 @@ public class BookDao {
 
 			while(rs.next()){
 
-
 				searchedBookName = new Book();
 				searchedBookName.setBookBarcode(rs.getInt("bookBarcode"));
 				searchedBookName.setBookName(rs.getString("bookName"));
