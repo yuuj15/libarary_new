@@ -3,6 +3,7 @@ package library_view;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import library_controller.BookController;
 import library_controller.Controllers;
 import library_domain.Book;
 
@@ -20,7 +21,8 @@ public class BooksearchView {
 
 		if(bookList.size() == 0){
 
-			System.out.println("찾으시는 제품이 없습니다.");
+			System.out.println("찾으시는 도서가 없습니다.");
+			Controllers.getBookController().requesrSearchBook();
 
 		} else{
 
@@ -34,6 +36,22 @@ public class BooksearchView {
 				System.out.print(" " + bookList.get(i).getBookPublisher() + "\t");
 				System.out.println(" " + bookList.get(i).getGenreCode() + "\t");
 
+			}
+			
+			System.out.print("1.도서상세조회, 2.도서검섹화면으로 돌아가기 : ");
+			int number = keyboard.nextInt();
+			
+			if(number == 1)
+			{
+				Controllers.getBookController().requestBookDetailSeacrch();
+			}
+			else if(number == 2)
+			{
+				Controllers.getBookController().requesrSearchBook();
+			}
+			else
+			{
+				System.out.println("잘못 입력하셨습니다.");
 			}
 		}
 	}

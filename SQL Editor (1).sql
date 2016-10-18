@@ -1,14 +1,51 @@
---테이블 삭제
-drop table Genre;
-drop table  userinfo;
-drop table admin;
-drop table book;
-drop table bookloan;
-drop table bookmgm;
-drop table libcard;
+--장르관리테이블 삭제
 drop table genremgm;
 
---테이블생성
+--대출관리테이블 삭제
+drop table libcard;
+
+--도서관리테이블 삭제
+drop table bookmgm;
+
+--도서대출테이블 삭제
+drop table bookloan;
+
+--도서테이블 삭제
+drop table book;
+
+--장르테이블 삭제
+drop table Genre;
+
+--유저테이블 삭제
+drop table userinfo;
+
+--관리자테이블 삭제
+drop table admin;
+
+--장르테이블 확인
+select * from genre;
+
+--유저테이블 확인
+select * from userinfo;
+
+--관리자테이블 확인
+select * from admin;
+
+--도서테이블 확인
+select * from book;
+
+--도서대출테이블 확인
+select * from bookloan;
+
+--도서관리테이블 확인
+select * from bookmgm;
+
+--대출카드테이블 확인
+select * from libcard;
+
+--장르관리테이블 확인
+select * from genremgm;
+
 --장르테이블 생성
 create table Genre
 (
@@ -48,7 +85,7 @@ CREATE TABLE Book
    GenreCode varchar2(50) references Genre(GenreCode)
 );
 
---
+--도서대출테이블 생성
 CREATE TABLE BookLoan
 (
    LoanNumber int primary key,
@@ -60,6 +97,7 @@ CREATE TABLE BookLoan
 
 );
 
+--대출카드테이블 생성
 create table LibCard
 (
    LibCardBarcode int primary key,
@@ -69,12 +107,15 @@ create table LibCard
    UserBarcode int references UserInfo(UserBarcode)
 );
 
+--장르관리테이블 생성
 create table GenreMgm
 (
    GenreMgmNumber int,
    GenreCode varchar2(50) references Genre(GenreCode),
    AdminId varchar2(50) references Admin(AdminId)
 );
+
+--도서관리테이블 생성
 create table bookmgm
 (
    BookMgmNumber int primary key,
@@ -84,8 +125,7 @@ create table bookmgm
    
 );
 
-
---희망도서 신청
+--도서검색테이블 생성
 CREATE TABLE SEARCHBOOK(
 
   SEARCHBOOKNUMBER VARCHAR2(50) PRIMARY KEY,
@@ -95,6 +135,7 @@ CREATE TABLE SEARCHBOOK(
   SEARCHBOOKPRICE INT NOT NULL
   );
   
+--도서요청테이블 생성
 CREATE TABLE REQUESTBOOK(
 
   REQUESTBOOKNUMBER INT PRIMARY KEY,
@@ -105,6 +146,7 @@ CREATE TABLE REQUESTBOOK(
   REQUESTBOOKPRICE INT NOT NULL
   );
   
+  --도서구매테이블 생성
  CREATE TABLE CARTBOOK(
   
   BOOKNUMBER INT PRIMARY KEY,
@@ -113,12 +155,12 @@ CREATE TABLE REQUESTBOOK(
   BOOKPUBLISHER VARCHAR2(50) NOT NULL,
   BOOKCOUNTNUMBER VARCHAR2(50) NOT NULL,
   BOOKPRICE INT NOT NULL,
-  BOOKBUYDATE DATE DEFAULT SYSDATE
-  
+  BOOKBUYDATE DATE DEFAULT SYSDATE  
 );
 
-
+--admin계정 삽입
 insert into admin values('admin','admin','관장','김권식');
+--장르 삽입
 insert into genre values('g1','철학');
 insert into genre values('g2 ','종교');
 insert into genre values('g3 ','사회과학');
@@ -126,12 +168,12 @@ insert into genre values('g4 ','순수과학');
 insert into genre values('g5 ','기술과학');
 insert into genre values('g6 ','예술');
 insert into genre values('g7 ','언어');
-insert into genre values('g8 ','문학 ');
-insert into genre values('g9 ','역사 ');
+insert into genre values('g8 ','문학');
+insert into genre values('g9 ','역사');
 insert into genre values('g10 ','학문과 과학 ');
 insert into genre values('g11 ','언어와 문학 ');
-commit;
 
+--도서검색테이블 값 삽입
 insert into SEARCHBOOK values(1, '롤리폴리', '폴리', '롤리', '1000');
 insert into SEARCHBOOK values(2, '미네랄워터', '미네랄', '워터', '1000');
 insert into SEARCHBOOK values(3, '메모장', '메', '모장', '1000');
@@ -143,13 +185,12 @@ insert into SEARCHBOOK values(8, '마웃', '마', '우스', '1000');
 insert into SEARCHBOOK values(9, '이슈리스크', '이슈', '리스크', '1000');
 insert into SEARCHBOOK values(10, '생쥐와거미', '생쥐', '거미', '1000');
 insert into SEARCHBOOK values(11, '롤미메', '폴미모', '니프', '1000');
-commit;
 
-select * from genre;
-select * from userinfo;
+--관리자 생성확인
 select * from admin;
-select * from book;
-select * from bookloan;
-select * from bookmgm;
-select * from libcard;
-select * from genremgm;
+--장르 생성확인
+select * from genre;
+--도서검색 생성 확인
+select * from searchbook;
+
+commit;

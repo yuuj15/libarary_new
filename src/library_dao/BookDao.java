@@ -132,7 +132,10 @@ public class BookDao {
 		String sql = null;
 
 		try{
-			sql = "select rownum, book.BOOKNAME from (select count(bookbarcode) tt , bookbarcode from bookloan where bookbarcode is not null group by bookbarcode order by tt desc ) tmp, book where book.bookbarcode = tmp.bookbarcode and rownum <=5";
+			sql = "select rownum, book.BOOKNAME from (select count(bookbarcode) tt , bookbarcode "
+					+ "from bookloan where bookbarcode is not null "
+					+ "group by bookbarcode order by tt desc ) tmp, book "
+					+ "where book.bookbarcode = tmp.bookbarcode and rownum <=5";
 			pstmt = Controllers.getProgramController().getConnection().prepareStatement(sql);
 			rs = pstmt.executeQuery();
 
@@ -174,7 +177,9 @@ public class BookDao {
 
 		try {
 
-			String sql = "select bookname,bookauthor,bookpublisher,genrename,bookloantf, bookloandate from book,genre,bookloan where book.bookbarcode = bookloan.bookbarcode and book.genrecode = genre.genrecode and book.bookbarcode = ?";
+			String sql = "select bookname,bookauthor,bookpublisher,genrename,bookloantf, bookloandate "
+					+ "from book,genre,bookloan where book.bookbarcode = bookloan.bookbarcode "
+					+ "and book.genrecode = genre.genrecode and book.bookbarcode = ?";
 			pstmt = Controllers.getProgramController().getConnection().prepareStatement(sql);
 			pstmt.setInt(1, barcodeNumber);
 			rs = pstmt.executeQuery();
@@ -186,7 +191,10 @@ public class BookDao {
 			}
 
 			if (lineCount > 0) {
-				sql = "select bookname,bookauthor,bookpublisher,genrename,bookloantf, bookloandate from book,genre,bookloan where book.bookbarcode = bookloan.bookbarcode and book.genrecode = genre.genrecode and book.bookbarcode = ?";
+				sql = "select bookname,bookauthor,bookpublisher,genrename,bookloantf, bookloandate "
+						+ "from book,genre,bookloan "
+						+ "where book.bookbarcode = bookloan.bookbarcode and book.genrecode = genre.genrecode "
+						+ "and book.bookbarcode = ?";
 				pstmt = Controllers.getProgramController().getConnection().prepareStatement(sql);
 				pstmt.setInt(1, barcodeNumber);
 				rs = pstmt.executeQuery();
@@ -199,12 +207,13 @@ public class BookDao {
 					bookInfo.setGenreName(rs.getString("genrename"));
 					bookInfo.setBookLoanTF(rs.getString("bookloantf"));
 					bookInfo.setBookLoanDate(rs.getDate("bookloandate"));
-				}
-				
+				}	
 
-			} else {
+			} 
+			else {
 				// 쿼리 날린 결과가 없다.
-				sql = "select bookname,bookauthor,bookpublisher,genrename from book, genre where book.genrecode = genre.genrecode and book.bookbarcode = ? ";
+				sql = "select bookname,bookauthor,bookpublisher,genrename from book, genre"
+						+ "where book.genrecode = genre.genrecode and book.bookbarcode = ? ";
 				pstmt = Controllers.getProgramController().getConnection().prepareStatement(sql);
 				pstmt.setInt(1, barcodeNumber);
 				rs = pstmt.executeQuery();
@@ -220,7 +229,8 @@ public class BookDao {
 				
 			}
 
-		} catch (
+		} 
+		catch (
 
 		SQLException e) {
 			e.printStackTrace();
