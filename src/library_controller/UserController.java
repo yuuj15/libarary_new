@@ -55,6 +55,7 @@ public class UserController {
 		String userNewName = userChangeNameView.UserNewName();
 
 		boolean success = userDao.userChangeName(userNewName);
+		requestUserList();
 
 	}
 
@@ -64,6 +65,7 @@ public class UserController {
 		String userNewAddr = userChangeAddrView.UserNewAddr();
 
 		boolean success = userDao.userChangeAddr(userNewAddr);
+		requestUserList();
 
 	}
 
@@ -73,6 +75,7 @@ public class UserController {
 		String userNewTel = userChangeTelView.UserNewTel();
 
 		boolean success = userDao.userChangeTel(userNewTel);
+		requestUserList();
 
 	}
 

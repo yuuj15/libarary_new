@@ -6,6 +6,7 @@ import library_dao.BookDao;
 import library_domain.Book;
 import library_domain.BookDetail;
 import library_domain.BookLoanTop5;
+import library_view.AlertView;
 import library_view.BookDetailSearchView;
 import library_view.BookLoanListView;
 import library_view.BookSelectOneView;
@@ -41,8 +42,8 @@ public class BookController {
 		bookSearchView.searchedBookList(bookList);
 
 		// 도서 검색 리스트 보여주기
-
-		requesrSearchBook();
+		requestBookDetailSeacrch();
+		//requesrSearchBook();
 
 	}
 	// 저자로 검색하는 뷰
@@ -78,15 +79,17 @@ public class BookController {
 		bookTop5List.top5List(bookLoans);
 
 	}
+	//형이 연결
 	public void requestBookDetailSeacrch() {
 
 		BookDetailSearchView bookDetailSearchView = new BookDetailSearchView();
 		int barcodeNumber = bookDetailSearchView.bookDetailInfo();
 
 		BookDetail bookInfo = bookDao.searchDetailBook(barcodeNumber);
-
 		BookSelectOneView bookSelectOneView = new BookSelectOneView();
 		bookSelectOneView.outputOneBook(bookInfo);
+		requesrSearchBook();
+		
 	}
 
 
